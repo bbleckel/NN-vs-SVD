@@ -1,0 +1,20 @@
+Notes:
+
+Neural Nets:
+	Input layer, a vector in R^n
+	Output, a vector in R^m
+	-> magic in the middle -- neural net, let's call it N.
+
+	N is made up of layers of neurons with real value numbers. The value is based on the neurons it's connected to. A neuron is called "dense" if it is connected to all of the neurons in the layer below it. Each connection, or "edge," get a unique amplification factor and a bias factor. The neuron also has a "sigma" that is the activation function. That activation function, taken from biology, is usually such that below a certain threshold where it is off, and above the threshold it is on. For us, the activation function will be the identity function (y=x). In addition, we won't even have bias terms!
+
+	We're going to deal with a very particual type of neural net. We want to understand the matrix A: R^n -> R^n. So let's look at a set of vectors v, and look at the set of vectors Av. So input is v, and output is Av. The neural net will give us some A~, that isn't quite perfect, but close.
+
+	We would love to actually find a lower rank approximation of a matrix, rather than just an approximation.
+		-We know that we can use the SVD, but this can be problematic with large matrices
+		-So what else can we do, to approximate the funciton A: R^n -> R^n, with the specification that it must be a matrix of rank k A_k?
+			Make a "choke-point" at the inner layer, that limits the rank of the A~ to k.
+			This will give us a rank k matrix approximation of A, but how good is it compared to the SVD version of A_k?
+
+		So we make a few thousand vectors, make A, use the neural net with the limited inner layer to find a rank k approximation of A, and see how well it can learn it (i.e. how close it is to the rank k SVD approx).
+			-Are there certain types of matrices where this works well, or better than others?
+			-How does the number of inner layers, and combination of them change the answer?
